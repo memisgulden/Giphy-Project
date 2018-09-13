@@ -13,8 +13,7 @@
         crossorigin="anonymous">
 
     <!-- Text Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 
     <!-- Favicon Tab Icon-->
     <!-- <link rel="icon" href="assets/images/favicon.ico"> -->
@@ -29,7 +28,7 @@
     <!-- Take each topic to make a button, need a for loop -->
 
 
-    <div class="container">
+    <div class="container-fluid">
 
         <br>
 
@@ -38,15 +37,13 @@
             <h1 class="text-center">Giphy Page</h1>
         </div>
 
-
-        <!-- Make Your Bid -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" id="input">
                         <form>
                             <div class="form-group row">
-                                <label for="bidder-name">Add an Animal:</label>
+                                <label for="bidder-name">Add An Animal:</label>
                                 <input class="form-control" id="newAnimal" type="text">
                             </div>
                             <button class="btn btn-primary" id="submit" type="submit">Submit</button>
@@ -57,7 +54,7 @@
 
             <div class="col-lg-12 pt-4">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" id="buttons">
                         <form>
                             <div class="form-group row">
                                 <label>Click Me!</label>
@@ -72,11 +69,16 @@
                 </div>
             </div>
 
-            <div class="col-lg-12 pt-4">
+            <div class="col-lg-12 pt-4 pb-1">
                 <div class="card">
                     <div class="card-body" id="giphyArea">
-                        <label>Click To Play!</label>
-                        <div id="gifs-appear-here"></div>
+                        <form>
+                            <div class="form-group row">
+                                <label>Click To Play!</label>
+                            </div>
+                            <div id="gifs-appear-here">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -116,6 +118,8 @@
 
             console.log("button click");
 
+            $(".container-fluid").css("background-color", "red");
+
             var animal = $(this).attr("data-animal");
 
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
@@ -149,7 +153,18 @@
 
         // animate gif on click //
         $(document).on("click", "img", function () {
+
+            // var play = results[i].images.fixed_height.url;
+            // var still = results[i].images.fixed_height_still.url;
+
             $(this).attr("src", $(this).data('play'));
+
+            // if ($(this).attr("src") == play) {
+            //     $(this).attr("src", still);
+            // }
+            // else if ($(this).attr("src") == play) {
+            //     $(this).attr("src", still);
+            // };
         });
 
     </script>

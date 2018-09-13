@@ -1,5 +1,47 @@
-#newAnimal {
-    background-color: aquamarine;
+html, body, .container-fluid {
+    background-image: url(../bananas.png);
+    /* background-repeat: no-repeat; */
+    /* background-size: auto; */
+    background-size: cover;
+    background-position: center;  
+    font-family: 'Indie Flower', cursive;
+    font-display: bold;
+    margin-left: 10%;
+    margin-right: 10%;
+
+  
+}
+
+.jumbotron {
+    background-color: #f5ee75 !important;
+    font-size: 40px;
+
+}
+
+#input {
+    background-color: #f5ee75; 
+    font-size: 30px;
+
+}
+
+#buttons {
+    background-color: #f5ee75;
+    font-size: 30px;
+ 
+
+}
+
+#gifs {
+    background-color:#f5ee75;
+    font-size: 30px;
+ 
+}
+
+#giphyArea {
+    background-color:#f5ee75;
+    font-size: 30px;
+ 
+
 }
 
 .animalBttn {
