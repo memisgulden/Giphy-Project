@@ -57,14 +57,16 @@
 
             <div class="col-lg-12 pt-4">
                 <div class="card">
-                    <div class="card-body" id="buttonArea">
+                    <div class="card-body">
                         <form>
                             <div class="form-group row">
                                 <label>Click Me!</label>
                             </div>
-                            <button class="animalBttn" data-animal="cat">meow</button>
-                            <button class="animalBttn" data-animal="dog">woof</button>
-                            <button class="animalBttn" data-animal="bird">chirp</button>
+                            <div id="buttonArea">
+                                <button class="animalBttn" data-animal="cat">cat</button>
+                                <button class="animalBttn" data-animal="dog">dog</button>
+                                <button class="animalBttn" data-animal="bird">bird</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -73,6 +75,7 @@
             <div class="col-lg-12 pt-4">
                 <div class="card">
                     <div class="card-body" id="giphyArea">
+                        <label>Click To Play!</label>
                         <div id="gifs-appear-here"></div>
                     </div>
                 </div>
@@ -101,6 +104,9 @@
             console.log(button);
 
             $("#buttonArea").append(button);
+
+            //clear new animal from input line //
+            $("form").trigger("reset");
         });
 
         // Click on animal button //
@@ -109,7 +115,6 @@
             event.preventDefault();
 
             console.log("button click");
-
 
             var animal = $(this).attr("data-animal");
 
@@ -131,7 +136,9 @@
                         var p = $("<p>").text("Rating: " + results[i].rating);
                         var animalImage = $("<img>");
 
-                        animalImage.attr("src", results[i].images.fixed_height.url);
+                        //make initial gif still //
+                        animalImage.attr("src", results[i].images.fixed_height_still.url);
+                        animalImage.attr("data-play", results[i].images.fixed_height.url);
                         animalDiv.append(p);
                         animalDiv.append(animalImage);
 
@@ -140,7 +147,10 @@
                 });
         });
 
-
+        // animate gif on click //
+        $(document).on("click", "img", function () {
+            $(this).attr("src", $(this).data('play'));
+        });
 
     </script>
 </body>
