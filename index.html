@@ -87,12 +87,29 @@
     <script>
         console.log("I work!");
 
+        // create new animal //
+        $("#submit").on("click", function () {
+            event.preventDefault();
+            console.log("submit click");
+
+            var userAnimal = $("#newAnimal").val().trim();
+            console.log(userAnimal);
+
+            var button = $("<button>").text(userAnimal).addClass("animalBttn").attr({ 'data-animal': userAnimal });
+            // button.data('src', userAnimal);
+
+            console.log(button);
+
+            $("#buttonArea").append(button);
+        });
+
         // Click on animal button //
-        $(".animalBttn").on("click", function () {
+        $(document).on("click", ".animalBttn", function () {
 
             event.preventDefault();
 
             console.log("button click");
+
 
             var animal = $(this).attr("data-animal");
 
@@ -123,23 +140,7 @@
                 });
         });
 
-        // create new animal //
-        $("#submit").on("click", function () {
-            event.preventDefault();
-            console.log("submit click");
 
-            var userAnimal = $("#newAnimal").val().trim();
-            console.log(userAnimal);
-
-            var button = $("<button>").text(userAnimal);
-            button.attr(userAnimal);
-            button.data('data', 'animal');
-            button.addClass("animalBttn");
-
-            console.log(button);
-
-            $("#buttonArea").append(button);
-        });
 
     </script>
 </body>
