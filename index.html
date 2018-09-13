@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Giphy Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- BootStrap Link-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <!-- Text Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet">
+
+    <!-- Favicon Tab Icon-->
+    <!-- <link rel="icon" href="assets/images/favicon.ico"> -->
+
+</head>
+
+<body>
+    <!-- Before you can make any part of our site work,
+    you need to create an array of strings, 
+    each one related to a topic that interests you. 
+    Save it to a variable called topics -->
+    <!-- Take each topic to make a button, need a for loop -->
+
+
+    <div class="container">
+
+        <br>
+
+        <!-- Jumbotron Title -->
+        <div class="jumbotron">
+            <h1 class="text-center">Giphy Page</h1>
+        </div>
+
+
+        <!-- Make Your Bid -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="bidder-name">Add an Animal:</label>
+                                <input class="form-control" id="newAnimal" type="text">
+                            </div>
+                            <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 pt-4">
+                <div class="card">
+                    <div class="card-body" id="buttonArea">
+                        <form>
+                            <div class="form-group row">
+                                <label>Click Me!</label>
+                            </div>
+                            <button class="animalBttn" data-animal="cat">meow</button>
+                            <button class="animalBttn" data-animal="dog">woof</button>
+                            <button class="animalBttn" data-animal="bird">chirp</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 pt-4">
+                <div class="card">
+                    <div class="card-body" id="giphyArea">
+                        <div id="gifs-appear-here"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Javascript and JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        console.log("I work!");
+
+        // Click on animal button //
+        $(".animalBttn").on("click", function () {
+
+            event.preventDefault();
+
+            console.log("button click");
+
+            var animal = $(this).attr("data-animal");
+
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                animal + "&api_key=SpxUE5CY6vjt77S1xbEpJ53OLPtBg12c&limit=10";
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                .then(function (response) {
+                    console.log(queryURL);
+                    console.log(response);
+                    var results = response.data;
+
+                    for (var i = 0; i < results.length; i++) {
+
+                        var animalDiv = $("<div>");
+                        var p = $("<p>").text("Rating: " + results[i].rating);
+                        var animalImage = $("<img>");
+
+                        animalImage.attr("src", results[i].images.fixed_height.url);
+                        animalDiv.append(p);
+                        animalDiv.append(animalImage);
+
+                        $("#gifs-appear-here").prepend(animalDiv);
+                    }
+                });
+        });
+
+        // create new animal //
+        $("#submit").on("click", function () {
+            event.preventDefault();
+            console.log("submit click");
+
+            var userAnimal = $("#newAnimal").val().trim();
+            console.log(userAnimal);
+
+            var button = $("<button>").text(userAnimal);
+            button.attr(userAnimal);
+            button.data('data', 'animal');
+            button.addClass("animalBttn");
+
+            console.log(button);
+
+            $("#buttonArea").append(button);
+        });
+
+    </script>
+</body>
+
+</html>
